@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Parallelizing computation for score tests with radEmu • radEmu</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -70,7 +69,7 @@
                         <h4 data-toc-skip class="author">Sarah
 Teichman</h4>
             
-            <h4 data-toc-skip class="date">2025-04-21</h4>
+            <h4 data-toc-skip class="date">2025-05-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/statdivlab/radEmu/blob/main/vignettes/parallel_radEmu.Rmd" class="external-link"><code>vignettes/parallel_radEmu.Rmd</code></a></small>
       <div class="d-none name"><code>parallel_radEmu.Rmd</code></div>
@@ -195,7 +194,7 @@ we will provide <code>ch_fit</code> to the argument
 <span>                                            j <span class="op">=</span> <span class="va">mOTU_to_test</span><span class="op">)</span>, </span>
 <span>                       Y <span class="op">=</span> <span class="va">small_Y</span><span class="op">)</span></span>
 <span><span class="va">robust_score</span><span class="op">$</span><span class="va">coef</span><span class="op">$</span><span class="va">pval</span><span class="op">[</span><span class="va">mOTU_to_test</span><span class="op">]</span></span>
-<span><span class="co">#&gt; [1] 0.3016831</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.3017332</span></span></code></pre></div>
 <p>Now, we can see that it took a little while to run our robust score
 test. If we investigate the coefficient table in our
 <code>robust_score</code> output, we can see that we have a p-value of
@@ -263,7 +262,7 @@ follows:</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">score_res</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">coef</span><span class="op">$</span><span class="va">pval</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="co">## robust score test p-value for the first taxon</span></span>
 <span>  <span class="va">score_res</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">coef</span><span class="op">$</span><span class="va">pval</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="co">## robust score test p-value for the second taxon</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; [1] 0.03936535 0.03647755</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.03935969 0.03644216</span></span></code></pre></div>
 <p>To help organise this information, we can make a coefficient matrix
 that combines the information from each component in our list:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -286,17 +285,17 @@ that combines the information from each component in our list:</p>
 <span><span class="co">#&gt; 4  GroupCRC         Faecalibacterium prausnitzii [ref_mOTU_v2_1379]</span></span>
 <span><span class="co">#&gt; 5  GroupCRC                  Eubacterium siraeum [ref_mOTU_v2_1387]</span></span>
 <span><span class="co">#&gt;   category_num    estimate        se      lower     upper  score_stat</span></span>
-<span><span class="co">#&gt; 1            1  1.48637593 0.8965269 -0.2707846 3.2435364 4.245031113</span></span>
-<span><span class="co">#&gt; 2            2  2.31316834 0.8270260  0.6922272 3.9341095 4.374639205</span></span>
-<span><span class="co">#&gt; 3            3  3.08640201 1.0274037  1.0727278 5.1000763 3.186778669</span></span>
-<span><span class="co">#&gt; 4            4 -0.34307844 0.3520048 -1.0329952 0.3468384 0.825277528</span></span>
-<span><span class="co">#&gt; 5            5  0.03891827 0.4779880 -0.8979210 0.9757575 0.007383133</span></span>
+<span><span class="co">#&gt; 1            1  1.48637593 0.8965269 -0.2707846 3.2435364 4.245275404</span></span>
+<span><span class="co">#&gt; 2            2  2.31316834 0.8270260  0.6922272 3.9341095 4.376293446</span></span>
+<span><span class="co">#&gt; 3            3  3.08640201 1.0274037  1.0727278 5.1000763 3.184676599</span></span>
+<span><span class="co">#&gt; 4            4 -0.34307844 0.3520048 -1.0329952 0.3468384 0.825647934</span></span>
+<span><span class="co">#&gt; 5            5  0.03891827 0.4779880 -0.8979210 0.9757575 0.007383741</span></span>
 <span><span class="co">#&gt;         pval</span></span>
-<span><span class="co">#&gt; 1 0.03936535</span></span>
-<span><span class="co">#&gt; 2 0.03647755</span></span>
-<span><span class="co">#&gt; 3 0.07423617</span></span>
-<span><span class="co">#&gt; 4 0.36364165</span></span>
-<span><span class="co">#&gt; 5 0.93152591</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 0.03935969</span></span>
+<span><span class="co">#&gt; 2 0.03644216</span></span>
+<span><span class="co">#&gt; 3 0.07433170</span></span>
+<span><span class="co">#&gt; 4 0.36353400</span></span>
+<span><span class="co">#&gt; 5 0.93152310</span></span></code></pre></div>
 <p>The column containing our p-values is called <code>pval</code>.</p>
 <p>Happy testing!</p>
 </div>
@@ -311,7 +310,7 @@ that combines the information from each component in our list:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer>
